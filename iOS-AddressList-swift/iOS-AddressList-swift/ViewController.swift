@@ -15,7 +15,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     let kScreenWidth = UIScreen.main.bounds.size.width
     let kScreenHeight = UIScreen.main.bounds.size.height
     
-    let identifier : String = "tableviewCell"
+    
     
     var naviTitle : String?
     
@@ -41,7 +41,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView.init()
-        tableView.register(UINib.init(nibName: "WondSubDetailTableCell", bundle: Bundle.main), forCellReuseIdentifier: identifier)
+       
     }
     func loadListData(){
         
@@ -57,7 +57,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         self.navigationController?.view.addSubview(sectionTitleView!)
         
-        let cellContents = ["爱时尚的小姑娘","爱吃糖的甜甜猪","爱提问的波波","巴拉拉小魔仙","不夜城"]
+        let cellContents = ["A","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","爱时尚的小姑娘","爱吃糖的甜甜猪","爱提问的波波","巴拉拉小魔仙","不夜城"]
         indexArray = ChineseString.indexArray(cellContents)
         letterResultArray = ChineseString.letterSortArray(cellContents)
     }
@@ -82,13 +82,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         return 44
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let identifier : String = "tableviewCell\(indexPath.row)"
+         tableView.register(UINib.init(nibName: "WondSubDetailTableCell", bundle: Bundle.main), forCellReuseIdentifier: identifier)
         let cell : WondSubDetailTableCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WondSubDetailTableCell
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         let sectionTitles : NSArray = letterResultArray?.object(at: indexPath.section) as! NSArray
         cell.cellTitle.text = sectionTitles.object(at: indexPath.row) as? String
-        if indexPath.row == 0{
-            cell.isPlay = true
-        }
+//        if indexPath.row == 0{
+//            cell.isPlay = true
+//        }
         return cell
     }
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
